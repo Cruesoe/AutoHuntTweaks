@@ -4,8 +4,8 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
-    <RootNamespace>AutoHuntNumbersPatch</RootNamespace>
-    <AssemblyName>AutoHuntNumbersPatch</AssemblyName>
+    <RootNamespace>NumbersCompatibilityPatch</RootNamespace>
+    <AssemblyName>NumbersCompatibilityPatch</AssemblyName>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>$(MSBuildThisFileDirectory)bin\$(Configuration)\</OutputPath>
     <DebugType>full</DebugType>
@@ -19,7 +19,7 @@
     <RimWorldModAssemblies>$(RimWorldModRoot)\1.6\Assemblies\</RimWorldModAssemblies>
     <RimWorldModAbout>$(RimWorldModRoot)\About\</RimWorldModAbout>
     <RimWorldModKeyed>$(RimWorldModRoot)\Languages\English\Keyed\</RimWorldModKeyed>
-    <RimWorldModTextures>$(RimWorldModRoot)\Textures\UI\AutoHuntNumbersPatch\</RimWorldModTextures>
+    <RimWorldModTextures>$(RimWorldModRoot)\Textures\UI\NumbersCompatibilityPatch\</RimWorldModTextures>
     <CopyToLocalRimWorldMods Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll')">true</CopyToLocalRimWorldMods>
   </PropertyGroup>
   <ItemGroup>
@@ -51,15 +51,19 @@
     <MakeDir Directories="$(ModAssemblies)" />
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModAssemblies)" />
     <Delete Files="$(ModAssemblies)$(TargetName).pdb" Condition="Exists('$(ModAssemblies)$(TargetName).pdb')" />
+    <Delete Files="$(ModAssemblies)AutoHuntNumbersPatch.dll" Condition="Exists('$(ModAssemblies)AutoHuntNumbersPatch.dll')" />
+    <Delete Files="$(ModAssemblies)AutoHuntNumbersPatch.pdb" Condition="Exists('$(ModAssemblies)AutoHuntNumbersPatch.pdb')" />
     <MakeDir Directories="$(RimWorldModAssemblies)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(RimWorldModAssemblies)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
     <Delete Files="$(RimWorldModAssemblies)$(TargetName).pdb" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(RimWorldModAssemblies)$(TargetName).pdb')" />
+    <Delete Files="$(RimWorldModAssemblies)AutoHuntNumbersPatch.dll" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(RimWorldModAssemblies)AutoHuntNumbersPatch.dll')" />
+    <Delete Files="$(RimWorldModAssemblies)AutoHuntNumbersPatch.pdb" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(RimWorldModAssemblies)AutoHuntNumbersPatch.pdb')" />
     <MakeDir Directories="$(RimWorldModAbout)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
     <Copy SourceFiles="$(MSBuildThisFileDirectory)..\About\About.xml" DestinationFolder="$(RimWorldModAbout)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\About\About.xml')" />
     <Copy SourceFiles="$(MSBuildThisFileDirectory)..\About\Preview.png" DestinationFolder="$(RimWorldModAbout)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\About\Preview.png')" />
     <MakeDir Directories="$(RimWorldModKeyed)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
     <Copy SourceFiles="$(MSBuildThisFileDirectory)..\Languages\English\Keyed\Keys.xml" DestinationFolder="$(RimWorldModKeyed)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\Languages\English\Keyed\Keys.xml')" />
     <MakeDir Directories="$(RimWorldModTextures)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\Textures\UI\AutoHuntNumbersPatch\Settings.png" DestinationFolder="$(RimWorldModTextures)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\Textures\UI\AutoHuntNumbersPatch\Settings.png')" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\Textures\UI\NumbersCompatibilityPatch\Settings.png" DestinationFolder="$(RimWorldModTextures)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\Textures\UI\NumbersCompatibilityPatch\Settings.png')" />
   </Target>
 </Project>

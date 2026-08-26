@@ -5,7 +5,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace AutoHuntNumbersPatch;
+namespace NumbersCompatibilityPatch;
 
 [HarmonyPatch]
 public static class Patch_NumbersWildlifeAutoTame

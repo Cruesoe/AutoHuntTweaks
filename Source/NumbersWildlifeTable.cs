@@ -4,7 +4,7 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 
-namespace AutoHuntNumbersPatch;
+namespace NumbersCompatibilityPatch;
 
 internal static class NumbersWildlifeTable
 {

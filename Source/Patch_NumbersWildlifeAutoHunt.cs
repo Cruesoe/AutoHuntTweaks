@@ -5,7 +5,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace AutoHuntNumbersPatch;
+namespace NumbersCompatibilityPatch;
 
 [HarmonyPatch]
 public static class Patch_NumbersWildlifeAutoHunt
@@ -18,7 +18,7 @@ public static class Patch_NumbersWildlifeAutoHunt
     private const float Pad = 6f;
     private const float Gap = 6f;
 
-    private static readonly Texture2D SettingsIcon = ContentFinder<Texture2D>.Get("UI/AutoHuntNumbersPatch/Settings");
+    private static readonly Texture2D SettingsIcon = ContentFinder<Texture2D>.Get("UI/NumbersCompatibilityPatch/Settings");
 
     private static FieldInfo? autoHuntSettingsField;
     private static FieldInfo? autoHuntEnabledField;
@@ -107,7 +107,7 @@ public static class Patch_NumbersWildlifeAutoHunt
                     Find.WindowStack.Add(new Dialog_ModSettings(mod));
             }
 
-            TooltipHandler.TipRegion(settingsRect, "AutoHuntNumbersPatch_SettingsTip".Translate());
+            TooltipHandler.TipRegion(settingsRect, "NumbersCompatibilityPatch_SettingsTip".Translate());
         }
 
         if (enabled == before)
