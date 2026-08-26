@@ -15,12 +15,16 @@
     <RimWorldManaged>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed</RimWorldManaged>
     <HarmonyDll>C:\Program Files (x86)\Steam\steamapps\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HarmonyDll>
     <ModAssemblies>$(MSBuildThisFileDirectory)..\1.6\Assemblies\</ModAssemblies>
-    <RimWorldModRoot>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Auto Hunt Numbers Patch</RimWorldModRoot>
+    <RimWorldModRoot>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Numbers Compatibility Patch</RimWorldModRoot>
     <RimWorldModAssemblies>$(RimWorldModRoot)\1.6\Assemblies\</RimWorldModAssemblies>
     <RimWorldModAbout>$(RimWorldModRoot)\About\</RimWorldModAbout>
     <RimWorldModKeyed>$(RimWorldModRoot)\Languages\English\Keyed\</RimWorldModKeyed>
     <RimWorldModTextures>$(RimWorldModRoot)\Textures\UI\AutoHuntNumbersPatch\</RimWorldModTextures>
+    <CopyToLocalRimWorldMods Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll')">true</CopyToLocalRimWorldMods>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
       <HintPath>$(RimWorldManaged)\Assembly-CSharp.dll</HintPath>
@@ -47,15 +51,15 @@
     <MakeDir Directories="$(ModAssemblies)" />
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModAssemblies)" />
     <Delete Files="$(ModAssemblies)$(TargetName).pdb" Condition="Exists('$(ModAssemblies)$(TargetName).pdb')" />
-    <MakeDir Directories="$(RimWorldModAssemblies)" />
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(RimWorldModAssemblies)" />
-    <Delete Files="$(RimWorldModAssemblies)$(TargetName).pdb" Condition="Exists('$(RimWorldModAssemblies)$(TargetName).pdb')" />
-    <MakeDir Directories="$(RimWorldModAbout)" />
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\About\About.xml" DestinationFolder="$(RimWorldModAbout)" Condition="Exists('$(MSBuildThisFileDirectory)..\About\About.xml')" />
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\About\Preview.png" DestinationFolder="$(RimWorldModAbout)" Condition="Exists('$(MSBuildThisFileDirectory)..\About\Preview.png')" />
-    <MakeDir Directories="$(RimWorldModKeyed)" />
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\Languages\English\Keyed\Keys.xml" DestinationFolder="$(RimWorldModKeyed)" Condition="Exists('$(MSBuildThisFileDirectory)..\Languages\English\Keyed\Keys.xml')" />
-    <MakeDir Directories="$(RimWorldModTextures)" />
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\Textures\UI\AutoHuntNumbersPatch\Settings.png" DestinationFolder="$(RimWorldModTextures)" Condition="Exists('$(MSBuildThisFileDirectory)..\Textures\UI\AutoHuntNumbersPatch\Settings.png')" />
+    <MakeDir Directories="$(RimWorldModAssemblies)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(RimWorldModAssemblies)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
+    <Delete Files="$(RimWorldModAssemblies)$(TargetName).pdb" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(RimWorldModAssemblies)$(TargetName).pdb')" />
+    <MakeDir Directories="$(RimWorldModAbout)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\About\About.xml" DestinationFolder="$(RimWorldModAbout)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\About\About.xml')" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\About\Preview.png" DestinationFolder="$(RimWorldModAbout)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\About\Preview.png')" />
+    <MakeDir Directories="$(RimWorldModKeyed)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\Languages\English\Keyed\Keys.xml" DestinationFolder="$(RimWorldModKeyed)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\Languages\English\Keyed\Keys.xml')" />
+    <MakeDir Directories="$(RimWorldModTextures)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\Textures\UI\AutoHuntNumbersPatch\Settings.png" DestinationFolder="$(RimWorldModTextures)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\Textures\UI\AutoHuntNumbersPatch\Settings.png')" />
   </Target>
 </Project>
