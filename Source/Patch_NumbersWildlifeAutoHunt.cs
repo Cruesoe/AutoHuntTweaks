@@ -11,10 +11,7 @@ namespace AutoHuntNumbersPatch;
 public static class Patch_NumbersWildlifeAutoHunt
 {
     private const string AutoHuntPackageId = "Snues.AutoHunt";
-    private const string NumbersPackageId = "Mehni.Numbers";
-    private const string NumbersWindowTypeName = "Numbers.MainTabWindow_Numbers";
     private const string AutoHuntModTypeName = "AutoHunt.AutoHuntMod";
-    private const string WildAnimalsTableDefName = "Numbers_WildAnimals";
 
     private const float IconSize = 28f;
     private const float CheckboxHeight = 30f;
@@ -23,8 +20,6 @@ public static class Patch_NumbersWildlifeAutoHunt
 
     private static readonly Texture2D SettingsIcon = ContentFinder<Texture2D>.Get("UI/AutoHuntNumbersPatch/Settings");
 
-    private static Type? numbersWindowType;
-    private static FieldInfo? pawnTableDefField;
     private static FieldInfo? autoHuntSettingsField;
     private static FieldInfo? autoHuntEnabledField;
     private static Mod? autoHuntMod;
@@ -32,25 +27,22 @@ public static class Patch_NumbersWildlifeAutoHunt
     public static bool Prepare()
     {
         if (ModLister.GetActiveModWithIdentifier(AutoHuntPackageId, true) == null
-            || ModLister.GetActiveModWithIdentifier(NumbersPackageId, true) == null)
+            || !NumbersWildlifeTable.TryInit())
             return false;
 
-        var numbersWindow = AccessTools.TypeByName(NumbersWindowTypeName);
         var autoHuntModType = AccessTools.TypeByName(AutoHuntModTypeName);
         var autoHuntSettings = AccessTools.TypeByName("AutoHunt.Settings");
-        if (numbersWindow == null || autoHuntModType == null || autoHuntSettings == null)
+        if (autoHuntModType == null || autoHuntSettings == null)
         {
-            Log.Warning("[Auto Hunt Numbers Patch] Auto Hunt and Numbers are both active, but their expected types were not found.");
+            Log.Warning($"{NumbersWildlifeTable.LogPrefix} Auto Hunt is active, but its expected types were not found.");
             return false;
         }
 
-        numbersWindowType = numbersWindow;
-        pawnTableDefField = AccessTools.Field(numbersWindow, "pawnTableDef");
         autoHuntSettingsField = AccessTools.Field(autoHuntModType, "settings");
         autoHuntEnabledField = AccessTools.Field(autoHuntSettings, "enabled");
-        if (pawnTableDefField == null || autoHuntSettingsField == null || autoHuntEnabledField == null)
+        if (autoHuntSettingsField == null || autoHuntEnabledField == null)
         {
-            Log.Warning("[Auto Hunt Numbers Patch] Auto Hunt and Numbers are both active, but their expected fields were not found.");
+            Log.Warning($"{NumbersWildlifeTable.LogPrefix} Auto Hunt is active, but its expected fields were not found.");
             return false;
         }
 
@@ -70,11 +62,7 @@ public static class Patch_NumbersWildlifeAutoHunt
         if (Event.current.type == EventType.Layout)
             return;
 
-        if (numbersWindowType == null || !numbersWindowType.IsInstanceOfType(__instance))
-            return;
-
-        var tableDef = pawnTableDefField?.GetValue(__instance) as Def;
-        if (tableDef == null || tableDef.defName != WildAnimalsTableDefName)
+        if (!NumbersWildlifeTable.IsOpen(__instance))
             return;
 
         var settings = autoHuntSettingsField?.GetValue(null);
