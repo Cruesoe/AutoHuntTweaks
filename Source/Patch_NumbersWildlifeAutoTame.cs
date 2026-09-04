@@ -5,7 +5,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace NumbersCompatibilityPatch;
+namespace AutoHuntTweaks;
 
 [HarmonyPatch]
 public static class Patch_NumbersWildlifeAutoTame
@@ -50,7 +50,7 @@ public static class Patch_NumbersWildlifeAutoTame
             return;
 
         var buttonRect = new Rect(rect.x, rect.yMax - ButtonOffsetY, ButtonWidth, ButtonHeight);
-        TooltipHandler.TipRegion(buttonRect, "NumbersCompatibilityPatch_AutoTameTip".Translate());
+        TooltipHandler.TipRegion(buttonRect, "AutoHuntTweaks_AutoTameTip".Translate());
         if (!Widgets.ButtonText(buttonRect, "Auto-tame settings"))
             return;
 

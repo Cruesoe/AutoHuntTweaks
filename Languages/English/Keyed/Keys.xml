@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-	<NumbersCompatibilityPatch_SettingsTip>Open Auto Hunt settings</NumbersCompatibilityPatch_SettingsTip>
-	<NumbersCompatibilityPatch_AutoTameTip>Open Auto Tame species list</NumbersCompatibilityPatch_AutoTameTip>
-	<NumbersCompatibilityPatch_Title>Auto Hunt Tweaks</NumbersCompatibilityPatch_Title>
-	<NumbersCompatibilityPatch_ForceBottomSetting>Always show Auto Hunt controls at the bottom</NumbersCompatibilityPatch_ForceBottomSetting>
-	<NumbersCompatibilityPatch_ForceBottomSettingTip>Moves Auto Hunt's toggle and settings cog to the bottom of the Wildlife tab, matching where they appear when Numbers is installed, even if Numbers isn't loaded.</NumbersCompatibilityPatch_ForceBottomSettingTip>
+	<AutoHuntTweaks_SettingsTip>Open Auto Hunt settings</AutoHuntTweaks_SettingsTip>
+	<AutoHuntTweaks_AutoTameTip>Open Auto Tame species list</AutoHuntTweaks_AutoTameTip>
+	<AutoHuntTweaks_Title>Auto Hunt Tweaks</AutoHuntTweaks_Title>
+	<AutoHuntTweaks_ForceBottomSetting>Always show Auto Hunt controls at the bottom</AutoHuntTweaks_ForceBottomSetting>
+	<AutoHuntTweaks_ForceBottomSettingTip>Moves Auto Hunt's toggle and settings cog to the bottom of the Wildlife tab, matching where they appear when Numbers is installed, even if Numbers isn't loaded.</AutoHuntTweaks_ForceBottomSettingTip>
 </LanguageData>

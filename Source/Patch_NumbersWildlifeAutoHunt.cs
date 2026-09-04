@@ -5,7 +5,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace NumbersCompatibilityPatch;
+namespace AutoHuntTweaks;
 
 [HarmonyPatch]
 public static class Patch_NumbersWildlifeAutoHunt
@@ -32,7 +32,7 @@ public static class Patch_NumbersWildlifeAutoHunt
     private const float SharedRowOffsetY = 40f;
     private const float SharedRowHeight = 32f;
 
-    private static readonly Texture2D SettingsIcon = ContentFinder<Texture2D>.Get("UI/NumbersCompatibilityPatch/Settings");
+    private static readonly Texture2D SettingsIcon = ContentFinder<Texture2D>.Get("UI/AutoHuntTweaks/Settings");
 
     private static FieldInfo? autoHuntSettingsField;
     private static FieldInfo? autoHuntEnabledField;
@@ -88,7 +88,7 @@ public static class Patch_NumbersWildlifeAutoHunt
             // When forcing the bottom position, Patch_AutoHuntWildlifeTabForceBottom hides the
             // native toggle and redraws the whole row after it, so skip the cog here to avoid
             // drawing it twice.
-            if (!NumbersCompatibilityPatchMod.Settings.ForceAutoHuntBottom)
+            if (!AutoHuntTweaksMod.Settings.ForceAutoHuntBottom)
                 DrawSettingsCogNextToNativeToggle();
         }
     }
@@ -158,7 +158,7 @@ public static class Patch_NumbersWildlifeAutoHunt
                 Find.WindowStack.Add(new Dialog_ModSettings(mod));
         }
 
-        TooltipHandler.TipRegion(settingsRect, "NumbersCompatibilityPatch_SettingsTip".Translate());
+        TooltipHandler.TipRegion(settingsRect, "AutoHuntTweaks_SettingsTip".Translate());
     }
 
     private static Mod? GetAutoHuntMod()
@@ -208,7 +208,7 @@ public static class Patch_AutoHuntWildlifeTabForceBottom
         if (Event.current.type == EventType.Layout)
             return;
 
-        if (!NumbersCompatibilityPatchMod.Settings.ForceAutoHuntBottom)
+        if (!AutoHuntTweaksMod.Settings.ForceAutoHuntBottom)
             return;
 
         Widgets.DrawBoxSolid(

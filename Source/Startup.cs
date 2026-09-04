@@ -1,7 +1,7 @@
 using HarmonyLib;
 using Verse;
 
-namespace NumbersCompatibilityPatch;
+namespace AutoHuntTweaks;
 
 [StaticConstructorOnStartup]
 public static class Startup

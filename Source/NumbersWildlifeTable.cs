@@ -4,14 +4,14 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 
-namespace NumbersCompatibilityPatch;
+namespace AutoHuntTweaks;
 
 internal static class NumbersWildlifeTable
 {
     internal const string PackageId = "Mehni.Numbers";
     internal const string WindowTypeName = "Numbers.MainTabWindow_Numbers";
     internal const string TableDefName = "Numbers_WildAnimals";
-    internal const string LogPrefix = "[Numbers Compatibility Patch]";
+    internal const string LogPrefix = "[Auto Hunt Tweaks]";
 
     internal static Type? WindowType;
     internal static FieldInfo? PawnTableDefField;
