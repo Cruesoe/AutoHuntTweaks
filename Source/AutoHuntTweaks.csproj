@@ -1,69 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Build settings, RimWorld references and the copy into 1.6\Assemblies all come
+       from _ModKit via the Directory.Build.props/.targets at the repo root. -->
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-    <LangVersion>latest</LangVersion>
+    <RootNamespace>AutoHuntTweaks</RootNamespace>
+    <AssemblyName>AutoHuntTweaks</AssemblyName>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>disable</ImplicitUsings>
-    <RootNamespace>NumbersCompatibilityPatch</RootNamespace>
-    <AssemblyName>NumbersCompatibilityPatch</AssemblyName>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <OutputPath>$(MSBuildThisFileDirectory)bin\$(Configuration)\</OutputPath>
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-    <Optimize>false</Optimize>
-    <Deterministic>true</Deterministic>
-    <RimWorldManaged>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed</RimWorldManaged>
-    <HarmonyDll>C:\Program Files (x86)\Steam\steamapps\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HarmonyDll>
-    <ModAssemblies>$(MSBuildThisFileDirectory)..\1.6\Assemblies\</ModAssemblies>
-    <RimWorldModRoot>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Numbers Compatibility Patch</RimWorldModRoot>
-    <RimWorldModAssemblies>$(RimWorldModRoot)\1.6\Assemblies\</RimWorldModAssemblies>
-    <RimWorldModAbout>$(RimWorldModRoot)\About\</RimWorldModAbout>
-    <RimWorldModKeyed>$(RimWorldModRoot)\Languages\English\Keyed\</RimWorldModKeyed>
-    <RimWorldModTextures>$(RimWorldModRoot)\Textures\UI\NumbersCompatibilityPatch\</RimWorldModTextures>
-    <CopyToLocalRimWorldMods Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll')">true</CopyToLocalRimWorldMods>
+    <UnityModules>CoreModule;IMGUIModule;TextRenderingModule</UnityModules>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>$(RimWorldManaged)\Assembly-CSharp.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="0Harmony">
-      <HintPath>$(HarmonyDll)</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(RimWorldManaged)\UnityEngine.CoreModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>$(RimWorldManaged)\UnityEngine.IMGUIModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>$(RimWorldManaged)\UnityEngine.TextRenderingModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-  </ItemGroup>
-  <Target Name="CopyDllToModAssemblies" AfterTargets="Build">
-    <MakeDir Directories="$(ModAssemblies)" />
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModAssemblies)" />
-    <Delete Files="$(ModAssemblies)$(TargetName).pdb" Condition="Exists('$(ModAssemblies)$(TargetName).pdb')" />
-    <Delete Files="$(ModAssemblies)AutoHuntNumbersPatch.dll" Condition="Exists('$(ModAssemblies)AutoHuntNumbersPatch.dll')" />
-    <Delete Files="$(ModAssemblies)AutoHuntNumbersPatch.pdb" Condition="Exists('$(ModAssemblies)AutoHuntNumbersPatch.pdb')" />
-    <MakeDir Directories="$(RimWorldModAssemblies)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(RimWorldModAssemblies)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
-    <Delete Files="$(RimWorldModAssemblies)$(TargetName).pdb" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(RimWorldModAssemblies)$(TargetName).pdb')" />
-    <Delete Files="$(RimWorldModAssemblies)AutoHuntNumbersPatch.dll" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(RimWorldModAssemblies)AutoHuntNumbersPatch.dll')" />
-    <Delete Files="$(RimWorldModAssemblies)AutoHuntNumbersPatch.pdb" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(RimWorldModAssemblies)AutoHuntNumbersPatch.pdb')" />
-    <MakeDir Directories="$(RimWorldModAbout)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\About\About.xml" DestinationFolder="$(RimWorldModAbout)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\About\About.xml')" />
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\About\Preview.png" DestinationFolder="$(RimWorldModAbout)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\About\Preview.png')" />
-    <MakeDir Directories="$(RimWorldModKeyed)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\Languages\English\Keyed\Keys.xml" DestinationFolder="$(RimWorldModKeyed)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\Languages\English\Keyed\Keys.xml')" />
-    <MakeDir Directories="$(RimWorldModTextures)" Condition="'$(CopyToLocalRimWorldMods)' == 'true'" />
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\Textures\UI\NumbersCompatibilityPatch\Settings.png" DestinationFolder="$(RimWorldModTextures)" Condition="'$(CopyToLocalRimWorldMods)' == 'true' and Exists('$(MSBuildThisFileDirectory)..\Textures\UI\NumbersCompatibilityPatch\Settings.png')" />
-  </Target>
 </Project>
+
