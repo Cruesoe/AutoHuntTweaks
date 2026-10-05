@@ -1,0 +1,2 @@
+Adds quick settings access.
+Puts the auto hint tick box on the bottom right if Numbers is active, or if you choose in the options.
